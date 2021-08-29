@@ -1,7 +1,7 @@
 async function fetchChannels(channels){
 	let messages = [];
 	for(let i = 0; i < channels.length; i++){
-		await channels[i].fetchMessages().then(_messages => messages = messages.concat(_messages.array()));
+		await channels[i].messages.fetch().then(_messages => messages = messages.concat(_messages.array()));
 	}
 	return messages;
 }
