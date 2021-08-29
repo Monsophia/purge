@@ -14,7 +14,7 @@ async function deleteMessages(messages){
 
 module.exports = {
 	delete: (user, channels, callback) => {
-		console.log(`Deleting messages from ${user.username}#${user.discriminator}`);
+		console.log(`Deleting messages from ${user.tag}`);
 		let p = 0;
 		let n = 0;
 		let pass = () => {
@@ -23,9 +23,9 @@ module.exports = {
 				messages = messages.filter(m => m.author.id === user.id);
 				if(messages.length === 0){
 					if(n > 0)
-						console.log(`Done : ${n} messages deleted from ${user.username}#${user.discriminator}`);
+						console.log(`Done : ${n} messages deleted from ${user.tag}`);
 					else
-						console.log(`No message found to delete from ${user.username}#${user.discriminator}`);
+						console.log(`No message found to delete from ${user.tag}`);
 					if(callback)
 						callback(n);
 					return;
