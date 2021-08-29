@@ -15,17 +15,17 @@ bot.on("ready", async () => {
   messageHandler.init(bot.user.id, bot.guilds.get(botconfig.guild), botconfig.messages)
   console.log(`${bot.user.username} is working!`);
 
-     botconfig.channels.cache.forEach(c => {
-       c = guild.channels.get(c);
-       switch(c.type){
-         case 'text':
-           channels.push(c);
-           break;
-         case 'category':
-           channels = channels.concat(guild.channels.filter(_c => _c.parentID === c.id && _c.type === 'text').array());
-           break;
-       }
-     });
+  botconfig.channels.cache.forEach(c => {
+    c = guild.channels.get(c);
+    switch (c.type) {
+      case 'text':
+        channels.push(c);
+        break;
+      case 'category':
+        channels = channels.concat(guild.channels.filter(_c => _c.parentID === c.id && _c.type === 'text').array());
+        break;
+    }
+  });
 
 
 });
@@ -39,22 +39,24 @@ process.on('uncaughtException', err => console.error(err.stack));
 process.on('unhandledRejection', err => console.error(`Uncaught Promise Rejection: \n${err.stack}`));
 
 bot.on('guildMemberRemove', member => {
-if(member.guild.id !== botconfig.guild) return;
-const logChannel = bot.channels.cache.get(botconfig.logChannel);
-const guild = bot.guilds.cache.get("569304035472179200");
-// logChannel.send(`Deleting messages from \`${member.user.tag}\``);
-deleter.delete(member.user, channels, n => {
-  let deletedembed = new Discord.MessageEmbed()
-  .setAuthor("Auto Purge", bot.user.displayAvatarURL())
-  .setThumbnail(`${member.user.displayAvatarURL({ dynamic: true })}`)
-  .addField("User Left", `**${member.user.tag}**\n\`${member.user.id}\``)
-  .addField("Messages Deleted", `\`${n}\``)
-  .setColor("c04949")
-  .setFooter(`User joined ${member.joinedAt}`, guild.iconURL({ dynamic: true }))
+  if (member.guild.id !== botconfig.guild) return;
+  const logChannel = bot.channels.cache.get(botconfig.logChannel);
+  const guild = bot.guilds.cache.get("569304035472179200");
+  // logChannel.send(`Deleting messages from \`${member.user.tag}\``);
+  deleter.delete(member.user, channels, n => {
+    let deletedembed = new Discord.MessageEmbed()
+      .setAuthor("Auto Purge", bot.user.displayAvatarURL())
+      .setThumbnail(`${member.user.displayAvatarURL({ dynamic: true })}`)
+      .addField("User Left", `**${member.user.tag}**\n\`${member.user.id}\``)
+      .addField("Messages Deleted", `\`${n}\``)
+      .setColor("c04949")
+      .setFooter(`User joined ${member.joinedAt}`, guild.iconURL({
+        dynamic: true
+      }))
 
-  if(botconfig.logChannel)
-    logChannel.send(deletedembed);
-});
+    if (botconfig.logChannel)
+      logChannel.send(deletedembed);
+  });
 });
 
 bot.login(botconfig.token);
