@@ -1,4 +1,3 @@
-    
 const Discord = require('discord.js');
 
 const handler = {};
@@ -11,9 +10,9 @@ let addTextChannel = (textChannel, title, body, color, footer) => {
 };
 
 let add = (channel, title, body, color, footer) => {
-	switch(Guild.channels.get(channel).type){
+	switch(Guild.channels.cache.get(channel).type){
 		case 'category':
-			Guild.channels.filter(c => c.parentID === channel).forEach(textChannel => {
+			Guild.channels.cache.filter(c => c.parentID === channel).forEach(textChannel => {
 				addTextChannel(textChannel.id, title, body, color, footer);
 			});
 			break;
@@ -24,7 +23,7 @@ let add = (channel, title, body, color, footer) => {
 };
 
 let sendMessage = channel => {
-	Guild.channels.get(channel).send(new Discord.RichEmbed({
+	Guild.channels.cache.get(channel).send(new Discord.MessageEmbed({
 		title: handler[channel]['title'],
 		fields: [
 			{
@@ -37,7 +36,7 @@ let sendMessage = channel => {
 };
 
 let deleteLastMessage = (channel, callback) => {
-	channel.fetchMessages({ limit: 100 }).then(messages => {
+	channel.messages.fetch({ limit: 100 }).then(messages => {
 		let lastMessage = messages.find(message => message.author.id === ClientID);
 		if(!lastMessage) return callback();
 		lastMessage.delete().then(() => callback());
@@ -54,7 +53,7 @@ module.exports = {
 			});
 			add(item['channel'], item['title'], item['body'], item['color'] || '#FFFFFF', item['footer']);
 		});
-		Object.keys(handler).forEach(channel => deleteLastMessage(Guild.channels.get(channel), () => sendMessage(channel)));
+		Object.keys(handler).forEach(channel => deleteLastMessage(Guild.channels.cache.get(channel), () => sendMessage(channel)));
 	},
 	handle: message => {
 		if(!handler[message.channel.id] || message.channel.lastMessage.author.id === ClientID) return;
