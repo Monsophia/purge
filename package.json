@@ -1,7 +1,7 @@
 {
-  "name": "dac",
+  "name": "azrael-purge",
   "version": "1.0.0",
-  "description": "dac mod bor",
+  "description": "Azrael Advertising Server Purge Bot",
   "main": "index.js",
   "dependencies": {
     "discord.js": "^12.5.3"
@@ -11,5 +11,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "GPL-3.0"
 }
