@@ -1,18 +1,18 @@
 {
-  "token": "NTc2OTM3MzgzNzA3MTQ4MzAw.XNdxFg.ETF3oVkcGVEP-cyXV6stMaLbw3c",
-  "prefix": "=",
-  "guild": "569304035472179200",
-  "logChannel": "576944382238785547",
+  "token": "",
+  "prefix": "",
+  "guild": "",
+  "logChannel": "",
   "channels": [
-    "569529037949632518",
-    "569325169714135050",
-    "569544099900948511"
+    "",
+    "",
+    ""
   ],
   "messages": [{
-    "channel": "569325169714135050",
-    "title": "__Please read the following__",
-    "body": "<:DSC_check:571880126329913354> Only **4** Ads Per 24 hours\n<:DSC_check:571880126329913354> Ads MUST contain a description\n<:DSC_check:571880126329913354> Ads MUST contain a valid invite\n<:DSC_check:571880126329913354> Servers MUST follow ToS\n<:DSC_check:571880126329913354> All ads will be **auto deleted** if you leave",
-    "footer": "Thanks for advertising with DAC!",
-    "color": "#C71585"
+    "channel": "",
+    "title": "",
+    "body": "",
+    "footer": "",
+    "color": ""
   }]
 }
