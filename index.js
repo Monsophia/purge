@@ -4,7 +4,7 @@ const config = require('./botconfig.json');
 const messageHandler = require('./messageHandler.js');
 const bot = new Discord.Client();
 const deleter = require('./deleter.js');
-let guild = bot.guilds.cache.get("569304035472179200");
+let guild = bot.guilds.cache.get("882238507001741342");
 
 let Guild = null;
 
@@ -15,7 +15,7 @@ bot.on("ready", async () => {
   messageHandler.init(bot.user.id, bot.guilds.cache.get(botconfig.guild), botconfig.messages)
   console.log(`${bot.user.username} is working!`);
 
-  botconfig.channels.cache.forEach(c => {
+  botconfig.channels.forEach(c => {
     c = guild.channels.cache.get(c);
     switch (c.type) {
       case 'text':
@@ -41,7 +41,7 @@ process.on('unhandledRejection', err => console.error(`Uncaught Promise Rejectio
 bot.on('guildMemberRemove', member => {
   if (member.guild.id !== botconfig.guild) return;
   const logChannel = bot.channels.cache.get(botconfig.logChannel);
-  const guild = bot.guilds.cache.get("569304035472179200");
+  const guild = bot.guilds.cache.get("882238507001741342");
   // logChannel.send(`Deleting messages from \`${member.user.tag}\``);
   deleter.delete(member.user, channels, n => {
     let deletedembed = new Discord.MessageEmbed()
