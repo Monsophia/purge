@@ -1,2 +1,2 @@
 # purge
-Azrael Advertising Central
+Azrael Advertising Center
