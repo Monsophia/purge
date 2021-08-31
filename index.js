@@ -12,17 +12,17 @@ let channels = [];
 
 bot.on("ready", async () => {
   guild = bot.guilds.cache.get(botconfig.guild);
-  messageHandler.init(bot.user.id, bot.guilds.get(botconfig.guild), botconfig.messages)
+  messageHandler.init(bot.user.id, bot.guilds.cache.get(botconfig.guild), botconfig.messages)
   console.log(`${bot.user.username} is working!`);
 
   botconfig.channels.cache.forEach(c => {
-    c = guild.channels.get(c);
+    c = guild.channels.cache.get(c);
     switch (c.type) {
       case 'text':
         channels.push(c);
         break;
       case 'category':
-        channels = channels.concat(guild.channels.filter(_c => _c.parentID === c.id && _c.type === 'text').array());
+        channels = channels.concat(guild.channels.cache.filter(_c => _c.parentID === c.id && _c.type === 'text').array());
         break;
     }
   });
