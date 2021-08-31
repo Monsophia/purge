@@ -48,7 +48,7 @@ bot.on('guildMemberRemove', member => {
       .setAuthor("Auto Purge", bot.user.displayAvatarURL())
       .setThumbnail(`${member.user.displayAvatarURL({ dynamic: true })}`)
       .addField("User Left", `**${member.user.tag}**\n\`${member.user.id}\``)
-      .addField("Messages Deleted", `\`${n}\``)
+      .addField("Advertisements Deleted", `\`${n}\``)
       .setColor("c04949")
       .setFooter(`User joined ${member.joinedAt}`, guild.iconURL({
         dynamic: true
