@@ -1,13 +1,13 @@
-async function fetchChannels(channels){
+async function fetchChannels(channels) {
 	let messages = [];
-	for(let i = 0; i < channels.length; i++){
-		await channels[i].messages.fetch().then(_messages => messages = messages.concat(_messages.array()));
+	for (let i = 0; i < channels.length; i++) {
+		await channels[i].messages.fetch().then(messages => messages = messages.concat(messages.array()));
 	}
 	return messages;
 }
 
-async function deleteMessages(messages){
-	for(let i = 0; i < messages.length; i++){
+async function deleteMessages(messages) {
+	for (let i = 0; i < messages.length; i++) {
 		await messages[i].delete();
 	}
 }
@@ -21,18 +21,18 @@ module.exports = {
 			console.log(p === 0 ? 'Fetching' : 'Re-fetching');
 			fetchChannels(channels).then(messages => {
 				messages = messages.filter(m => m.author.id === user.id);
-				if(messages.length === 0){
-					if(n > 0)
+				if (messages.length === 0) {
+					if (n > 0)
 						console.log(`Done : ${n} messages deleted from ${user.tag}`);
 					else
 						console.log(`No message found to delete from ${user.tag}`);
-					if(callback)
+					if (callback)
 						callback(n);
 					return;
 				}
 				console.log(`Pass #${++p} : deleting ${messages.length} messages`);
 				deleteMessages(messages).then(() => {
-					n+= messages.length;
+					n += messages.length;
 					pass();
 				});
 			});

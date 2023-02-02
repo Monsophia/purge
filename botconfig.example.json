@@ -8,11 +8,13 @@
     "Category ID 2",
     "Category ID 3"
   ],
-  "messages": [{
-    "channel": "Category ID 1",
-    "title": "Embed Title",
-    "body": "Embed Body",
-    "footer": "Embed Footer",
-    "color": "Embed Color"
-  }]
+  "messages": [
+    {
+      "channel": "Category ID 1",
+      "title": "Embed Title",
+      "body": "Embed Body",
+      "footer": "Embed Footer",
+      "color": "Embed Color"
+    }
+  ]
 }

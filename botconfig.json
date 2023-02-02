@@ -8,11 +8,13 @@
     "",
     ""
   ],
-  "messages": [{
-    "channel": "",
-    "title": "",
-    "body": "",
-    "footer": "",
-    "color": ""
-  }]
+  "messages": [
+    {
+      "channel": "",
+      "title": "",
+      "body": "",
+      "footer": "",
+      "color": ""
+    }
+  ]
 }

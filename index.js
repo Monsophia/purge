@@ -1,12 +1,9 @@
 const Discord = require('discord.js');
 const botconfig = require('./botconfig.json');
-const config = require('./botconfig.json');
 const messageHandler = require('./messageHandler.js');
 const bot = new Discord.Client();
 const deleter = require('./deleter.js');
 let guild = bot.guilds.cache.get("882238507001741342");
-
-let Guild = null;
 
 let channels = [];
 
@@ -22,7 +19,7 @@ bot.on("ready", async () => {
         channels.push(c);
         break;
       case 'category':
-        channels = channels.concat(guild.channels.cache.filter(_c => _c.parentID === c.id && _c.type === 'text').array());
+        channels = channels.concat(guild.channels.cache.filter(c => c.parentID === c.id && c.type === 'text').array());
         break;
     }
   });
@@ -42,7 +39,7 @@ bot.on('guildMemberRemove', member => {
   if (member.guild.id !== botconfig.guild) return;
   const logChannel = bot.channels.cache.get(botconfig.logChannel);
   const guild = bot.guilds.cache.get("882238507001741342");
-  // logChannel.send(`Deleting messages from \`${member.user.tag}\``);
+  logChannel.send(`Deleting messages from \`${member.user.tag}\``);
   deleter.delete(member.user, channels, n => {
     let deletedembed = new Discord.MessageEmbed()
       .setAuthor("Auto Purge", bot.user.displayAvatarURL())
@@ -50,9 +47,7 @@ bot.on('guildMemberRemove', member => {
       .addField("User Left", `**${member.user.tag}**\n\`${member.user.id}\``)
       .addField("Advertisements Deleted", `\`${n}\``)
       .setColor("c04949")
-      .setFooter(`User joined ${member.joinedAt}`, guild.iconURL({
-        dynamic: true
-      }))
+      .setFooter(`User joined ${member.joinedAt}`, guild.iconURL({ dynamic: true }))
 
     if (botconfig.logChannel)
       logChannel.send(deletedembed);
